@@ -1,19 +1,21 @@
-import axios from "axios";
-import * as cheerio from "cheerio";
+// lib/scraper.ts
+
+import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 export async function scrapeBlogText(url: string): Promise<string> {
   try {
-    const response = await axios.get(url);
-    const $ = cheerio.load(response.data);
-    let text = "";
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
 
-    $("p").each((_, el) => {
-      text += $(el).text() + "\n";
-    });
+    // Yeh selector tumhare blog structure pe depend karta hai
+    // Yeh example sab <p> text ko join karta hai
+    const paragraphs = $('p').map((_, el) => $(el).text()).get();
+    const fullText = paragraphs.join('\n\n');
 
-    return text.trim();
+    return fullText || 'No text found!';
   } catch (error) {
-    console.error("Scraping failed:", error);
-    return "Failed to scrape content.";
+    console.error('Scrape Error:', error);
+    return 'Failed to scrape blog.';
   }
 }

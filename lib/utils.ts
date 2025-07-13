@@ -1,6 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+// lib/utils.ts
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+export function generateSummary(fullText: string): string {
+  // Simple static logic: pehle 100 words lo
+  const words = fullText.split(/\s+/).slice(0, 100);
+  const summary = words.join(' ') + '...';
+  return summary;
 }

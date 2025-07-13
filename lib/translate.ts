@@ -1,11 +1,22 @@
-const dictionary: Record<string, string> = {
-  "hello": "ہیلو",
-  "world": "دنیا",
-  "blog": "بلاگ",
-  "summary": "خلاصہ",
-  // Add more mappings as needed
+// lib/translate.ts
+
+const dictionary: { [key: string]: string } = {
+  'the': 'یہ',
+  'blog': 'بلاگ',
+  'is': 'ہے',
+  'about': 'کے بارے میں',
+  'and': 'اور',
+  'this': 'یہ',
+  'a': 'ایک',
+  'summary': 'خلاصہ',
+  'of': 'کا',
+  'text': 'متن',
+  // Apni zaroorat ke mutabiq aur words add karte jao
 };
 
-export function translateToUrdu(text: string): string {
-  return text.split(" ").map(word => dictionary[word.toLowerCase()] || word).join(" ");
+export function translateToUrdu(summary: string): string {
+  return summary
+    .split(' ')
+    .map(word => dictionary[word.toLowerCase()] || word)
+    .join(' ');
 }
