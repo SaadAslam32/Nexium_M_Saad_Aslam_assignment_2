@@ -1,13 +1,35 @@
-# Blog Summariser
+# 🧠 AI Blog Summarizer with Urdu Translation & Theme Toggle
 
-This app will:
+This is a powerful **AI Blog Summarizer** built with **Next.js**, **OpenAI**, and **MongoDB**. Paste any blog/article URL and get a concise summary in **English** as well as **Urdu**, with a sleek UI and theme toggle (dark/light mode) for a better user experience.
 
-- Take a blog URL as input.
-- Scrape blog content using `cheerio` and `axios`.
-- Simulate AI summarization (static logic).
-- Translate summary to Urdu using JS dictionary.
-- Store:
-  - Full blog text in MongoDB.
-  - Summary in Supabase.
-- Use ShadCN UI for frontend.
-- Deploy to Vercel.
+---
+
+## ✨ Features
+
+- ✅ Summarize any blog/article using OpenAI GPT
+- 🌐 Translate English summary into Urdu
+- 🌓 Theme toggle (Light/Dark)
+- 🌍 Mobile responsive design
+- ⚡ Built with performance and simplicity in mind
+
+---
+
+## 🛠 Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [OpenAI API](https://platform.openai.com/)
+- [MongoDB & Mongoose](https://mongoosejs.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide React Icons](https://lucide.dev/)
+- [Framer Motion](https://www.framer.com/motion/) (for subtle animations)
+- [next-themes](https://github.com/pacocoursey/next-themes) for dark/light toggle
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/your-username/blog-summarizer.git
+cd blog-summarizer

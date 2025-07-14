@@ -32,7 +32,7 @@ export default function Header() {
           <div className="flex items-center space-x-2">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 w-8 h-8 rounded-lg" />
             <Link href="/" className="text-xl font-bold text-gray-900 dark:text-white">
-              Summaraize
+              Summarize
             </Link>
           </div>
           
