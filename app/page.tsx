@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Sparkles, Globe, Zap, Check } from 'lucide-react';
+import { Loader2, Sparkles, Globe, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -16,10 +16,8 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const summariesRef = useRef<HTMLDivElement>(null);
   
-  // Scroll to summaries when they are generated
   useEffect(() => {
     if (result && summariesRef.current) {
-      // Small delay to ensure the element is fully rendered
       setTimeout(() => {
         summariesRef.current?.scrollIntoView({
           behavior: 'smooth',
@@ -36,21 +34,19 @@ export default function Home() {
     setResult(null);
 
     try {
-      // Simulate API call with a delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real app, you would call your API here:
-      // const response = await fetch('/api/summarize', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ url }),
-      // });
-      
-      // For demo purposes, use mock data
-      setResult({
-        englishSummary: "This article explores the latest advancements in AI technology, focusing on natural language processing. Researchers have developed new models that can understand context better than ever before. These innovations could revolutionize how we interact with technology, making digital assistants more intuitive and helpful. The future looks promising as AI continues to evolve at a rapid pace.",
-        urduSummary: "یہ مضمون مصنوعی ذہانت کی تازہ ترین ترقیات پر روشنی ڈالتا ہے، خاص طور پر قدرتی زبان کی پروسیسنگ پر توجہ مرکوز کرتا ہے۔ محققین نے نئے ماڈل تیار کیے ہیں جو پہلے سے کہیں بہتر سیاق و سباق کو سمجھ سکتے ہیں۔ یہ جدتیں انقلاب لا سکتی ہیں کہ ہم ٹیکنالوجی کے ساتھ کیسے تعامل کرتے ہیں، ڈیجیٹل معاونوں کو زیادہ بدیہی اور مددگار بنا سکتے ہیں۔ مستقبل روشن دکھائی دیتا ہے کیونکہ مصنوعی ذہانت تیزی سے ترقی کرتی رہتی ہے۔"
+      const response = await fetch('/api/summarize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Request failed');
+      }
+
+      const data = await response.json();
+      setResult(data);
     } catch (err: any) {
       setError(err.message || 'An unexpected error occurred');
     } finally {
@@ -362,7 +358,8 @@ export default function Home() {
                   </CardHeader>
                   <CardContent className="p-6">
                     <p 
-                      className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line urdu-text"
+                      className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line"
+                      style={{ direction: 'rtl', fontFamily: 'Noto Nastaliq Urdu, serif' }}
                     >
                       {result.urduSummary}
                     </p>
